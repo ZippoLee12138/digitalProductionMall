@@ -9,11 +9,17 @@
         <div class="head-nav">
           <ul>
             <li>登录</li>
+            <li class="nav-pile">|</li>
             <li>注册</li>
+            <li class="nav-pile">|</li>
             <li>关于</li>
           </ul>
         </div>
       </div>
+    </div>
+
+    <div class="app-foot">
+      <p>© 2019 fishenal MIT</p>
     </div>
   </div>
 </template>
@@ -29,7 +35,7 @@ export default {
 </script>
 
 <style>
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -43,8 +49,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
   margin: 0;
@@ -55,7 +61,7 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
@@ -106,6 +112,7 @@ body {
 .head-nav li {
   cursor: pointer;
   float: left;
+  font-weight: bold;
 }
 
 .app-head-inner {
@@ -118,6 +125,20 @@ body {
     width: 50px;
     margin-top: 20px;
     float: left;
+}
+
+.nav-pile {
+  padding: 0 10px;
+}
+
+.app-foot {
+  text-align: center;
+  height: 80px;
+  width: 100%;
+  line-height: 80px;
+  background: #e3e4e8;
+  clear: both;
+  margin-top: 30px;
 }
 
 </style>
