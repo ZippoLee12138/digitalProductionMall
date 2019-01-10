@@ -18,6 +18,8 @@
       </div>
     </div>
 
+    <router-view></router-view>
+
     <div class="app-foot">
       <p>© 2019 fishenal MIT</p>
     </div>
