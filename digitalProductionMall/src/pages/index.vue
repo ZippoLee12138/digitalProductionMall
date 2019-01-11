@@ -1,5 +1,5 @@
 <template>
-  <p>首页内容 使用sourcetree测试回退</p>
+  <p>首页内容</p>
   <div flex="main:center cross:center" style="width:500px; height: 500px; background: #108423">
     <div style="background: #fff">看看我是不是居中的</div>
   </div>
