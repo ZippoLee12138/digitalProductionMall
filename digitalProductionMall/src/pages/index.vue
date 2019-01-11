@@ -7,7 +7,6 @@
   <div>回退测试333333</div>
   <div>回退测试44444</div>
   <div>回退测试55555</div>  
-  <div>回退测试66666</div>  
 </template>
 
 <script>
