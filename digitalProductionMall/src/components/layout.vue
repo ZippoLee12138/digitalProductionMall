@@ -18,8 +18,10 @@
       </div>
     </div>
 
-    <router-view></router-view>
-
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+      
     <div class="app-foot">
       <p>© 2019 fishenal MIT</p>
     </div>
