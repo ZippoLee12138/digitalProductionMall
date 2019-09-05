@@ -9,6 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+var express = require('express')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -68,14 +69,45 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   ]
 })
 
-var jsonServer = require('json-server') //引入文件
-var apiServer = jsonServer.create(); //创建服务器
-var apiRouter = jsonServer.router('static/mock/db.json') //引入json 文件 ，这里的地址就是你json文件的地址，我再static下的建立了一个文件夹mock，然后把json文件放在里面
-var middlewares = jsonServer.defaults(); //返回JSON服务器使用的中间件。
-apiServer.use(middlewares)
-apiServer.use('/api',apiRouter)
-apiServer.listen( 9527 ,function(){ //json服务器端口:9527
-  console.log('JSON Server is running')  //json server成功运行会在git bash里面打印出'JSON Server is running'
+// var jsonServer = require('json-server') //引入文件
+// var apiServer = jsonServer.create(); //创建服务器
+// var apiRouter = jsonServer.router('static/mock/db.json') //引入json 文件 ，这里的地址就是你json文件的地址，我再static下的建立了一个文件夹mock，然后把json文件放在里面
+// var middlewares = jsonServer.defaults(); //返回JSON服务器使用的中间件。
+// apiServer.use(middlewares)
+// apiServer.use('/api',apiRouter)
+// apiServer.listen( 9527 ,function(){ //json服务器端口:9527
+//   console.log('JSON Server is running')  //json server成功运行会在git bash里面打印出'JSON Server is running'
+// })
+
+var apiServer = express()
+var bodyParser = require('body-parser')
+apiServer.use(bodyParser.urlencoded({ extended: true }))
+apiServer.use(bodyParser.json())
+var apiRouter = express.Router()
+var fs = require('fs')
+apiRouter.route('/:apiName')
+.all(function (req, res) {
+  fs.readFile('static/mock/db.json', 'utf8', function (err, data) {
+    if (err) throw err
+    var data = JSON.parse(data)
+    if (data[req.params.apiName]) {
+      res.json(data[req.params.apiName])  
+    }
+    else {
+      res.send('no such api name')
+    }
+    
+  })
+})
+
+
+apiServer.use('/api', apiRouter);
+apiServer.listen(9527, function (err) {
+  if (err) {
+    console.log(err)
+    return
+  }
+  console.log('Listening at http://localhost:9527' + '\n')
 })
 
 

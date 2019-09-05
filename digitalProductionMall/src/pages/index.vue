@@ -20,7 +20,7 @@
         <ul>
           <li v-for="item in newsList">
             <a :href="item.url" class="new-item">{{ item.title }}</a>
-            <span v-if="item.hot" class="hot-tag">HOT</span>
+            <!-- <span v-if="item.hot" class="hot-tag">HOT</span> -->
           </li>
         </ul>
       </div>
@@ -48,9 +48,11 @@
 <script>
 export default {
   created () {
-    this.$http.get('api/getNewsList')
-    .then((data) => {
-      console.log(data)
+    this.$http.post('api/getNewsList')
+    .then((res) => {
+      console.log(res
+      )
+      this.newsList = res.data
     }).catch((error) => {
       console.log(error)
     })
@@ -105,22 +107,7 @@ export default {
           ]
         }
       },
-      newsList: [
-        {
-          title: '数据统计',
-          url: 'http://www.baidu.com'
-        },        {
-          title: '数据预测',
-          url: 'http://www.baidu.com'
-        },        {
-          title: '数据分析',
-          url: 'http://www.baidu.com',
-          hot: true
-        },        {
-          title: '广告分发',
-          url: 'http://www.baidu.com'
-        },
-      ],
+      newsList: [],
       boardList: [
         {
           title: '开放产品',
@@ -247,7 +234,7 @@ export default {
   color: #fff;
 }
 .new-item {
-  /* display: inline-block; */
+  display: inline-block;
   width: 230px;
   overflow: hidden;
   text-overflow: ellipsis;
