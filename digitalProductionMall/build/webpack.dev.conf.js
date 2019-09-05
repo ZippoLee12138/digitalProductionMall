@@ -68,6 +68,17 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   ]
 })
 
+var jsonServer = require('json-server') //引入文件
+var apiServer = jsonServer.create(); //创建服务器
+var apiRouter = jsonServer.router('static/mock/db.json') //引入json 文件 ，这里的地址就是你json文件的地址，我再static下的建立了一个文件夹mock，然后把json文件放在里面
+var middlewares = jsonServer.defaults(); //返回JSON服务器使用的中间件。
+apiServer.use(middlewares)
+apiServer.use('/api',apiRouter)
+apiServer.listen( 9527 ,function(){ //json服务器端口:9527
+  console.log('JSON Server is running')  //json server成功运行会在git bash里面打印出'JSON Server is running'
+})
+
+
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port
   portfinder.getPort((err, port) => {

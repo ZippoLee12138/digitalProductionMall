@@ -47,6 +47,15 @@
 
 <script>
 export default {
+  created () {
+    this.$http.get('api/getNewsList',{id : 33})
+    .then((data) => {
+      console.log(data)
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
+
   data () {
     return {
       productList: {
