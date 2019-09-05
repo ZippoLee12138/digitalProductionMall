@@ -3,13 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
 import IndexPage from './pages/index'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
-Vue.use(VueResource)
+Vue.use(VueAxios, axios)
 
 let router = new VueRouter({
   mode: 'history',

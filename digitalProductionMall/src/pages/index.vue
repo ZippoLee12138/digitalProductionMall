@@ -48,7 +48,7 @@
 <script>
 export default {
   created () {
-    this.$http.get('api/getNewsList',{id : 33})
+    this.$http.get('api/getNewsList')
     .then((data) => {
       console.log(data)
     }).catch((error) => {
