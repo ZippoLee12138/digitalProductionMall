@@ -1,9 +1,14 @@
 <template>
-  <div class="slide-show" >
+  <div class="slide-show" @mouseover="clearInv" @mouseout="runInv">
     <div class="slide-img">
       <a :href="slides[nowIndex].href">
-          <img :src="slides[nowIndex].src" >
-      </a>
+        <transition name="slide-trans">
+          <img v-if="isShow" :src="slides[nowIndex].src">
+        </transition>
+        <transition name="slide-trans-old">
+          <img v-if="!isShow" :src="slides[nowIndex].src">
+        </transition>
+        </a>
     </div>
     <h2>{{ slides[nowIndex].title }}</h2>
     <ul class="slide-pages">
@@ -19,7 +24,6 @@
   </template>
 
 <script>
-import { log } from 'util';
 export default {
     props: {
         slides: {
@@ -33,7 +37,8 @@ export default {
     },
     data() {
         return {
-            nowIndex: 1
+            nowIndex: 1,
+            isShow: true
         }
     },
     mounted () {        
@@ -41,7 +46,19 @@ export default {
     },
     methods: {
         goto(index) {
+          this.isShow = false
+          setTimeout(() => {
+            this.isShow = true
             this.nowIndex = index
+          }, 10);
+        },
+        runInv () {
+          this.invId = setInterval( () => {
+            this.goto(this.nextIndex)
+          },this.inv)
+        },
+        clearInv () {
+          clearInterval(this.invId)
         }
     },
     computed: {
@@ -58,6 +75,9 @@ export default {
             return this.nowIndex + 1
         }
 
+    },
+    mounted () {
+      this.runInv();
     }
 }
 </script>
