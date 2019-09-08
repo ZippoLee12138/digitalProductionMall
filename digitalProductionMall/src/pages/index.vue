@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="index-right">
-      <slide-show :slides="slides" :inv="invTime"></slide-show>
+      <slide-show :slides="slides" :inv="invTime" @onchange="doSomethingOnSlideChange"></slide-show>
       <div class="index-board-list">
         <div
         class="index-board-item"
@@ -166,6 +166,11 @@ export default {
           saleout: false
         }
       ],
+    }
+  },
+  methods: {
+    doSomethingOnSlideChange (e) {
+      // console.log('doSomethingOnSlideChange' + e)
     }
   }
 }
