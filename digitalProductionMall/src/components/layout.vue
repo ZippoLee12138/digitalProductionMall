@@ -11,7 +11,7 @@
             <li v-if="username !== ''">{{username}}</li>
             <li v-else @click="showLoginDialog">登录</li>
             <li class="nav-pile">|</li>
-            <li v-if="username !== ''" >退出</li>
+            <li v-if="username !== ''" @click="quit">退出</li>
             <li v-else @click="showRegDialog">注册</li>
             <li class="nav-pile">|</li>
             <li @click="showAboutDialog">关于</li>
@@ -40,8 +40,8 @@
 </template>
 
 <script>
-import Dialog from './base/dialog';
-import LogForm from './logForm';
+import Dialog from '@/components/base/dialog';
+import LogForm from '@/components/logForm';
 
 export default {
   components: {
@@ -72,6 +72,9 @@ export default {
     onSuccessLog (data) {      
       this.isShowLoginDialog = false
       this.username = data.username
+    },
+    quit () {
+      this.username = ''
     }
   }
 }
