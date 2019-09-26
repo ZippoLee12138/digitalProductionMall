@@ -189,6 +189,10 @@ export default {
   },
   methods: {
     onParamChange (attr, val) {
+      console.log(`attr:${attr},val${val}`);
+      console.log(val);
+      
+      
       this[attr] = val
       this.getPrice()
     },
