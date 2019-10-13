@@ -114,22 +114,22 @@
 
 <script>
 import VSelection from '../../components/base/selection'
-// import VCounter from '../../components/base/counter'
-// import VChooser from '../../components/base/chooser'
+import VCounter from '../../components/base/counter'
+import VChooser from '../../components/base/chooser'
 import VMulChooser from '../../components/base/multiplyChooser'
-// import Dialog from '../../components/base/dialog'
-// import BankChooser from '../../components/bankChooser'
-// import CheckOrder from '../../components/checkOrder'
+import Dialog from '../../components/base/dialog'
+import BankChooser from '../../components/bankChooser'
+import CheckOrder from '../../components/checkOrder'
 import _ from 'lodash'
 export default {
   components: {
     VSelection,
-  //   VCounter,
-  //   VChooser,
+    VCounter,
+    VChooser,
     VMulChooser,
-  //   MyDialog: Dialog,
-  //   BankChooser,
-  //   CheckOrder
+    MyDialog: Dialog,
+    BankChooser,
+    CheckOrder
   },
   data () {
     return {
