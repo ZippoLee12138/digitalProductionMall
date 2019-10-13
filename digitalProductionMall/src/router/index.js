@@ -7,6 +7,7 @@ import Analysis from '@/pages/detail/analysis'
 import Count from '@/pages/detail/count'
 import Forecast from '@/pages/detail/forecast'
 import Publish from '@/pages/detail/publish'
+import OrderList from '@/pages/orderList'
 
 Vue.use(Router)
 
@@ -42,6 +43,10 @@ export default new Router({
         }
 
       ]
+    }, {
+      path: '/orderList',
+      name: 'orderList',
+      component: OrderList
     }
   ]
 })
