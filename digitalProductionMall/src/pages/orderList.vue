@@ -27,8 +27,8 @@
         <tr>
           <th v-for="head in tableHeads" @click="changeOrderType(head)"  :class="{active: head.active}">{{head.label}}</th>
         </tr>
-        <tr>
-          <td></td>
+        <tr v-for="item in tableData" :key="item.period" >
+          <td v-for="head in tableHeads">{{ item[head.key] }}</td>
         </tr>
       </table>
     </div>
@@ -106,6 +106,8 @@ export default {
           active: false
         }
       ],
+      tableData:[],
+      currentOrder: 'asc'
     }
   },
   watch: {
@@ -128,16 +130,29 @@ export default {
       this.getList()     
     },
     getList () {
+      let reqParam = {
+        query: this.query,
+        productId: this.productId,
+        startDate: this.startDate,
+        endDate: this.endDate
+      }
+      this.$http.post('/api/getOrderList', reqParam).then(res => {
+        this.tableData = res.data.list
+      }).catch(err => {
 
+      })
     },
     changeOrderType (headItem) {
       this.tableHeads.map((item) => {
         item.active = headItem.key == item.key
         return item
-      })
-      console.log(this.tableHeads);
-      
+      })      
+      this.currentOrder = this.currentOrder == 'asc' ? 'desc' : 'asc'
+      this.tableData = _orderBy(this.tableData, headItem.key, this.currentOrder)
     }
+  },
+  mounted () {
+    this.getList()
   }
 }
 </script>
