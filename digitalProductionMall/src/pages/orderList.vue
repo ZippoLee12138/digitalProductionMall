@@ -106,8 +106,13 @@ export default {
           active: false
         }
       ],
-      tableData:[],
+      // tableData:[],
       currentOrder: 'asc'
+    }
+  },
+  computed: {
+    tableData () {
+      return this.$store.getters.orderList
     }
   },
   watch: {
@@ -118,29 +123,42 @@ export default {
 
   methods: {
     productChange (obj) {
-      this.productId = obj.value
-      
+      // this.productId = obj.value
+      this.$store.commit('updateParams', {
+        key: 'productId',
+        val: obj.value
+      })
+      this.getList()  
     },
     getStartDate (date) {
-      this.startDate = date        
+      // this.startDate = date      
+      this.$store.commit('updateParams', {
+        key: 'startDate',
+        val: date
+      })  
       this.getList()     
     },
     getEndDate (date) {
-      this.endDate = date
+      // this.endDate = date
+      this.$store.commit('updateParams', {
+        key: 'endDate',
+        val: date
+      })
       this.getList()     
     },
     getList () {
-      let reqParam = {
-        query: this.query,
-        productId: this.productId,
-        startDate: this.startDate,
-        endDate: this.endDate
-      }
-      this.$http.post('/api/getOrderList', reqParam).then(res => {
-        this.tableData = res.data.list
-      }).catch(err => {
+      // let reqParam = {
+      //   query: this.query,
+      //   productId: this.productId,
+      //   startDate: this.startDate,
+      //   endDate: this.endDate
+      // }
+      // this.$http.post('/api/getOrderList', reqParam).then(res => {
+      //   this.tableData = res.data.list
+      // }).catch(err => {
 
-      })
+      // })
+      this.$store.dispatch('fetchOrderList')
     },
     changeOrderType (headItem) {
       this.tableHeads.map((item) => {
